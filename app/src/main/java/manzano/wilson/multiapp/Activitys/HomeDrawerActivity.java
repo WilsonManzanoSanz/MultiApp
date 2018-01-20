@@ -1,10 +1,14 @@
 package manzano.wilson.multiapp.Activitys;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,8 +18,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
+import manzano.wilson.multiapp.Fragments.Dialog.DialogConfirm;
+import manzano.wilson.multiapp.Fragments.Dialog.DialogInfo;
 import manzano.wilson.multiapp.Fragments.FragmentAdminMain;
+import manzano.wilson.multiapp.Objects.User;
 import manzano.wilson.multiapp.R;
 
 public class HomeDrawerActivity extends AppCompatActivity
@@ -24,12 +38,25 @@ public class HomeDrawerActivity extends AppCompatActivity
     private Class fragmentClass;
     private Fragment fragment;
 
+    private User mUser;
+    private FirebaseAuth mAuth;
+    private FragmentManager fragmentManager;
+
+    private TextView mTextUserName;
+    private TextView mTextEmail;
+    private ImageView mProfilePhoto;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle bundle = getIntent().getExtras();
+        mAuth = FirebaseAuth.getInstance();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,9 +75,33 @@ public class HomeDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
 
+        mTextEmail = (TextView) headerView.findViewById(R.id.text_view_user_email);
+        mTextUserName = (TextView) headerView.findViewById(R.id.text_view_user_name);
+        mProfilePhoto = (ImageView) headerView.findViewById(R.id.image_profile_photo);
+        setUserInfo();
+
+
+
+
+        fragmentManager = getSupportFragmentManager();
         fragment = null;
         fragmentClass = FragmentAdminMain.class;
+
+
+    }
+
+    private void setUserInfo() {
+
+        FirebaseUser mUser = mAuth.getCurrentUser();
+
+        if(mUser!= null){
+            mTextUserName.setText(mUser.getDisplayName());
+            mTextEmail.setText(mUser.getEmail());
+            Picasso.with(getApplicationContext()).load(mUser.getPhotoUrl()).into(mProfilePhoto);
+        }
+
     }
 
     @Override
@@ -80,6 +131,12 @@ public class HomeDrawerActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (id == R.id.action_logout) {
+            DialogConfirm dialogConfirm = new DialogConfirm();
+            dialogConfirm.show(fragmentManager, "Add Order Fragment");
+
         }
 
         return super.onOptionsItemSelected(item);

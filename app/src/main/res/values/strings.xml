@@ -42,4 +42,15 @@
     <string name="user_create_account">Do your not have a user? Create Account</string>
     <string name="action_register">Register</string>
     <string name="sign_in_account">Did you already register? Sign in</string>
+    <string name="log_out">Log out</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm_email_message">Please check your email and verify your email address and go back
+        Thanks!
+    </string>
+
+    <!-- Facebook -->
+    <string name="facebook_app_id">1215748581900881</string>
+    <string name="fb_login_protocol_scheme">fb1215748581900881</string>
+    <string name="confirm_logout_message">Do you really want to log out?</string>
 </resources>
