@@ -53,4 +53,6 @@
     <string name="facebook_app_id">1215748581900881</string>
     <string name="fb_login_protocol_scheme">fb1215748581900881</string>
     <string name="confirm_logout_message">Do you really want to log out?</string>
+    <string name="profession_name">Profession_name</string>
+    <string name="profession_description">Profession_description</string>
 </resources>

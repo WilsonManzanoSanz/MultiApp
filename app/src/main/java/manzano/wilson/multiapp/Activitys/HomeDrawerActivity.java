@@ -1,34 +1,35 @@
 package manzano.wilson.multiapp.Activitys;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.gson.Gson;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import manzano.wilson.multiapp.Fragments.Dialog.DialogConfirm;
-import manzano.wilson.multiapp.Fragments.Dialog.DialogInfo;
-import manzano.wilson.multiapp.Fragments.FragmentAdminMain;
+import manzano.wilson.multiapp.Fragments.FragmentProfession;
 import manzano.wilson.multiapp.Objects.User;
 import manzano.wilson.multiapp.R;
 
@@ -45,6 +46,7 @@ public class HomeDrawerActivity extends AppCompatActivity
     private TextView mTextUserName;
     private TextView mTextEmail;
     private ImageView mProfilePhoto;
+    private String TAG = "HomeActivity";
 
 
     @Override
@@ -56,7 +58,6 @@ public class HomeDrawerActivity extends AppCompatActivity
 
         Bundle bundle = getIntent().getExtras();
         mAuth = FirebaseAuth.getInstance();
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,21 +83,17 @@ public class HomeDrawerActivity extends AppCompatActivity
         mProfilePhoto = (ImageView) headerView.findViewById(R.id.image_profile_photo);
         setUserInfo();
 
-
-
-
-        fragmentManager = getSupportFragmentManager();
-        fragment = null;
-        fragmentClass = FragmentAdminMain.class;
-
+        // Set the default Fragment
+        initializeDefaultFragment();
 
     }
+
 
     private void setUserInfo() {
 
         FirebaseUser mUser = mAuth.getCurrentUser();
 
-        if(mUser!= null){
+        if (mUser != null) {
             mTextUserName.setText(mUser.getDisplayName());
             mTextEmail.setText(mUser.getEmail());
             Picasso.with(getApplicationContext()).load(mUser.getPhotoUrl()).into(mProfilePhoto);
@@ -150,7 +147,8 @@ public class HomeDrawerActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-            fragmentClass = FragmentAdminMain.class;
+            changeLayout(FragmentProfession.class);
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -163,24 +161,39 @@ public class HomeDrawerActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
 
-    public void changeLayout(){
+    public void changeLayout(Class _class) {
         try {
+            fragmentClass = _class;
             assert fragmentClass != null;
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.frame_layout_content, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+    }
+
+
+    private void initializeDefaultFragment() {
+        fragmentManager = getSupportFragmentManager();
+        fragmentClass = FragmentProfession.class;
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.frame_layout_content, fragment).commit();
 
     }
 }
