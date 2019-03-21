@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "95631204162",
-    "firebase_url": "https://multiapp-2e518.firebaseio.com",
-    "project_id": "multiapp-2e518",
-    "storage_bucket": "multiapp-2e518.appspot.com"
+    "project_number": "563866334755",
+    "firebase_url": "https://react-dev-ead30.firebaseio.com",
+    "project_id": "react-dev-ead30",
+    "storage_bucket": "react-dev-ead30.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:95631204162:android:4a9dcb39f4634936",
+        "mobilesdk_app_id": "1:563866334755:android:4a9dcb39f4634936",
         "android_client_info": {
           "package_name": "manzano.wilson.multiapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "95631204162-cfqoih307cp1mnst6ogueflajckol869.apps.googleusercontent.com",
+          "client_id": "563866334755-149a8f7mg1roe7mqlb5fcclbmp8u3v7m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "manzano.wilson.multiapp",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "95631204162-4nbhd6b3b9q2jumlt27bhj1dvd1dpef8.apps.googleusercontent.com",
+          "client_id": "563866334755-lerssaphjnvdhaitjip2b2vjvo472hr0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-__9BP-Tlf7Z0VxDRj2uAsBCDR9559iA"
+          "current_key": "AIzaSyDaSccQnBIGgzkFyVHDRIeFUUbdnecl3Yo"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "95631204162-4nbhd6b3b9q2jumlt27bhj1dvd1dpef8.apps.googleusercontent.com",
+              "client_id": "563866334755-lerssaphjnvdhaitjip2b2vjvo472hr0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

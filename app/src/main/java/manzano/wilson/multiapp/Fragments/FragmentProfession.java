@@ -20,9 +20,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import manzano.wilson.multiapp.Activitys.HomeDrawerActivity;
 import manzano.wilson.multiapp.Objects.Profession;
 import manzano.wilson.multiapp.R;
-import manzano.wilson.multiapp.Recycler.RecyclerAdapater;
+import manzano.wilson.multiapp.Recycler.RecyclerAdapaterGalery;
 
 /**
  * Created by User on 29/11/2017.
@@ -32,7 +33,7 @@ public class FragmentProfession extends Fragment implements View.OnClickListener
     @Nullable
 
     private  RecyclerView mRecyclerView;
-    private RecyclerAdapater mAdapter;
+    private RecyclerAdapaterGalery mAdapter;
     private ArrayList<Profession> mProfessions;
     private String TAG = "FragmentProfession";
     private FirebaseFirestore mDataBase;
@@ -40,13 +41,16 @@ public class FragmentProfession extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_profession_list,container,false);
+
+        /*
         mProfessions = new ArrayList<>();
+
         mRecyclerView = result.findViewById(R.id.reclyclerview);
 
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new RecyclerAdapater(mProfessions);
+        mAdapter = new RecyclerAdapaterGalery(mProfessions);
         mRecyclerView.setAdapter(mAdapter);
         // Access a Cloud Firestore instance from your Activity
 
@@ -68,7 +72,8 @@ public class FragmentProfession extends Fragment implements View.OnClickListener
             }
         });
 
-        Toast.makeText(getActivity().getApplicationContext(),"Hello",Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getApplicationContext(),"Hello " + ((HomeDrawerActivity)getActivity()).getUser().getDisplayName(),Toast.LENGTH_LONG).show();
+        */
         return  result;
     }
 

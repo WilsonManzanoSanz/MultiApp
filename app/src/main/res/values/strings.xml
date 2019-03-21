@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MultiApp</string>
+    <string name="app_name">Test app</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -55,4 +55,8 @@
     <string name="confirm_logout_message">Do you really want to log out?</string>
     <string name="profession_name">Profession_name</string>
     <string name="profession_description">Profession_description</string>
+    <string name="consumo_actual">Consumo actual:</string>
+    <string name="lecture_date">Date</string>
+    <string name="lecture_time">Lecture time</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

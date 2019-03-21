@@ -2,16 +2,55 @@
 <ScrollView android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/colaboradores_universitat_autonoma_caribe"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Consumo electrico actual:"
+        android:background="#57a1ef"
+        android:textColor="#fff"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valor del consumo:"
+        android:background="#fff"
+        android:textColor="#57a1ef"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Consumo mes anterior:"
+        android:background="#57a1ef"
+        android:textColor="#fff"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estimado del mes:"
+        android:background="#fff"
+        android:textColor="#57a1ef"
+        android:textSize="25sp"/>
 
     <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/reclyclerview">
     </android.support.v7.widget.RecyclerView>
 
-</RelativeLayout>
+</LinearLayout>
 
 </ScrollView>

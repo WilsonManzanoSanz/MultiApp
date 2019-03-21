@@ -3,22 +3,20 @@ package manzano.wilson.multiapp.Activitys;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -356,7 +354,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
             mLoginTask = new UserLoginTask(email, password);
             mLoginTask.run();
         }
@@ -588,8 +585,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInUserWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+                        Log.i("user", String.valueOf(mAuth.getCurrentUser()));
                         assert user != null;
-                        if(user.isEmailVerified()){
+                        // No verify
+                        if(true || user.isEmailVerified()){
                             intentToMainActivity(user);
                         }
                         else {
@@ -695,7 +694,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onResume();
         Log.i(TAG, mAuth.toString());
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if ((currentUser != null ? currentUser.isEmailVerified() : false)){
+        if ((currentUser != null)){
             // Name, email address, and profile photo Url
             String name = currentUser.getDisplayName();
             String email = currentUser.getEmail();
@@ -731,8 +730,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
 }
-
-
 
 
    /* public class UserLoginTask implements Runnable {
